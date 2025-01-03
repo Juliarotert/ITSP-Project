@@ -3,7 +3,7 @@ Final Python Project for the ITSP Course in WS 24/25
 
 ## Short description of the project
 In this project it's the goal to develop a tool for automated raster data download of polygonal area.
-
+  
 ### Idea
 **Problem:** Raster tile download at https://ni-lgln-opengeodata.hub.arcgis.com/ is only possible for single tiles or drawed polygon by user (But then you still have to download each selected tile manually). In land consolidation we have individual areas which intersect often with about 50 tiles. That means first trying to manually draw a good polygon like the procedure area and then 50 times pressing the download-button and select the path.
 
