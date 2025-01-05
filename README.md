@@ -10,7 +10,7 @@ In this project it's the goal to develop a tool for automated raster data downlo
 **Solution:** A Tool with an Input for polygon data, perform an intersection with the raster tiles and download all selected ones to one chosen output path.
 
 **Optional extension:** creating xyz-files out of elevation raster data in chosen resolution (e.g. 1, 5, 10 m)
-
+  
 **First Try:** "DGM1" Data, extendable on all other raster data types in https://ni-lgln-opengeodata.hub.arcgis.com/
 
 ### Concept
