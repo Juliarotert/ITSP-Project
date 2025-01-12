@@ -1,15 +1,13 @@
-import gui
-
-import functions.input_processing as ip
-import functions.api_interaction as api
-import functions.output_download as od
-import functions.raster2xyz as xyz
+from PyQt5.QtWidgets import QApplication
+from gui import RasterDownloader
+import sys
 
 
-# Execution of functions from classes
 
-# Get data input from GUI
 
-polygon_path = gui.getshapefile()
-
-epsg = gui.QLineEdit
+# Execution of GUI
+if __name__ == "__main__":
+    app = QApplication(sys.argv)
+    gui = RasterDownloader()
+    gui.show()
+    sys.exit(app.exec_())
