@@ -21,7 +21,26 @@ In this project it's the goal to develop a tool for automated raster data downlo
 - further functions button: xyz, transform to 4647, ...
 
 ### Realization
-- Steps in Python
+**Project Structure**
+- functions folder: files for classes with functions for processing
+- GUI: Input, Output, Buttons
+- main: Execute program
+- testdata, documentation, etc.
+
+**Functionalities**
+
+Downloader:
+- start GUI
+- choose I/O
+- Button "start download": reprojection, conversion, request, get download-links, execute links to path
+
+Raster2xyz:
+- select files
+- Button "Raster2xyz": create shape point file, convert every file and add to shape, save to path 
+
+** Using STAC-API**
+- STAC-API catalog: https://dgm.stac.lgln.niedersachsen.de/
+- API description: https://dgm.stac.lgln.niedersachsen.de/api.html
 
 ### Evaluation
 - functionality
@@ -32,3 +51,4 @@ In this project it's the goal to develop a tool for automated raster data downlo
 ## How to start the project (dependencies etc.)
 - PyQT
 - Geopandas
+- requirements.txt
