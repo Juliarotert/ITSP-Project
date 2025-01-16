@@ -38,7 +38,7 @@ Raster2xyz:
 - select files
 - Button "Raster2xyz": create shape point file, convert every file and add to shape, save to path 
 
-** Using STAC-API**
+**Using STAC-API**
 - STAC-API catalog: https://dgm.stac.lgln.niedersachsen.de/
 - API description: https://dgm.stac.lgln.niedersachsen.de/api.html
 
