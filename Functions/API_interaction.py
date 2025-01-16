@@ -1,73 +1,113 @@
 import requests
-import urllib.parse
+import json
+from pathlib import Path
 
+
+# Class to create and send request-urls and process the response
 class ApiInteraction:
-    def __init__(self, api_url, collection, geojson_path):
+    def __init__(self, api_url, collection_id, geojson_path):
         self.api_url = api_url
-        self.collection = collection
+        self.collection_id = collection_id
         self.geojson_path = geojson_path
 
+
+    # function to format the geojson file fitting for the request-url
+    def format_geojson_geometry(self):
+        # open and read the GeoJSON-file and extract the data
+        with open(self.geojson_path, 'r') as geojson_file:
+            data = json.load(geojson_file)
+
+        # only return the geometry of the geojson
+        geojson_geometry = json.dumps(data["features"][0]["geometry"],  ensure_ascii=False)
+
+        # return a geojson without Spaces
+        formatted_geojson_geometry = geojson_geometry.replace(" ", "")
+
+        return formatted_geojson_geometry
+
     # function to create an url which searches for all items of a collection that intersect wit a GeoJSON polygon
-    def request_search_intersection(self):
+    def create_request_search_intersects(self, limit, formatted_geojson_geometry):
         # define request-parts
         base = self.api_url
         search = "search"
-        collection = "?collections=" + str(self.collection)
-        intersection = "&intersection=" + urllib.parse.quote(self.geojson_path) # url-encode GeoJSON
-        limit = "&limit=20"
+        collection = "?collections=" + str(self.collection_id)
+        intersects = "&intersects=" + formatted_geojson_geometry
+        limit = "&limit=" + str(limit)
 
         # assemble url from parts
-        self.request_url = base + search + collection + intersection + limit
+        request_url = base + search + collection + intersects + limit
 
-        return self.request_url
+        return request_url
 
-    # function to get a response by executing a reqest
-    def execute_request(self):
+    # function to get a response by executing a request
+    def execute_request(self, request_url):
         # initialize response dicts
         payload = {}
         headers = {}
 
-        response = requests.request("GET", self.request_url, headers=headers, data=payload)
+        response = requests.request("GET", request_url, headers=headers, data=payload)
 
         return response
 
     # function to get only id and download urls from the response JSON (only for .tif-files)
     def collect_tif_download_urls(self, response):
         # initialize dict for item-ids and the associated download-url
-        id_with_link = {}
+        dict_id_with_url = {}
 
-        # proof if request was successful
+        # proof if request was successful and turn response to json
         if response.status_code == 200:
-            response = response.json()
+            response_json = response.json()
 
-            for item in response["features"]:
+            # iterate through items and add id and download url to dict
+            for item in response_json["features"]:
                 item_id = item["id"]
-                download_url = item["assets"].get(self.collection + "-tif", {}).get("href")
-                if download_url:
-                    id_with_link[item_id] = download_url
+                first_asset_object = list(item["assets"].keys())[0] # download-link is always in the first asset object
+                download_url = item["assets"][first_asset_object]["href"] # get href from first asset
+                dict_id_with_url[item_id] = download_url
         else:
-            print(f"Error {self.request_url}: {response.status_code}")
+            print(f"Error: {response.status_code}")
 
-        return id_with_link
+        return dict_id_with_url
+
+    def button_ai(self):
+        formatted_geojson_geometry = self.format_geojson_geometry()
+        request_url = self.create_request_search_intersects(500, formatted_geojson_geometry)
+        response = self.execute_request(request_url)
+        dict_id_with_url = self.collect_tif_download_urls(response)
+
+        return dict_id_with_url
 
 
-# Example
+# Example final
+# create object from class ApiInteraction
+dict = ApiInteraction("https://dgm.stac.lgln.niedersachsen.de/", "dgm1", str(Path.cwd()) + "/geojson output/testpolygon_small_4326.geojson").button_ai()
+
+print(dict)
+
+'''
+# Example for tests
 
 # base API url DGM
 api_url_dgm = "https://dgm.stac.lgln.niedersachsen.de/"
+
 # collection name
 collectiondgm1 = "dgm1"
+
 # path to geojson
-geojson = "C:/Users/julie/Documents/Julia/Master GeoInfSpat/ITSP/ITSP-Project/functions/polygon.geojson"
+geojson = str(Path.cwd()) + "/geojson output/testpolygon_small_4326.geojson"
 
 # create object from class ApiInteraction
 dgm1_api_interaction = ApiInteraction(api_url_dgm, collectiondgm1, geojson)
+
+# format
+formatted_geojson = dgm1_api_interaction.format_geojson_geometry()
+
 # get request url for intersection
-request = dgm1_api_interaction.request_search_intersection()
+request = dgm1_api_interaction.create_request_search_intersects(500, formatted_geojson)
 print(request)
 
 # get response by executing request
-response = dgm1_api_interaction.execute_request()
+response = dgm1_api_interaction.execute_request(request)
 
 # get download url dict from response
 url_dict = dgm1_api_interaction.collect_tif_download_urls(response)
@@ -78,7 +118,4 @@ for item_id, link in url_dict.items():
     count += 1
     print(f"{item_id}: {link}")
 print(f"Total count: {count}")
-
-
-
-
+'''
