@@ -1,15 +1,15 @@
 # ITSP-Project
-Final Python Project for the ITSP Course in WS 24/25
+**Final python-project for the Introduction to Software Programming course in wintersemester 24/25**
 
 ## Short description of the project
-In this project it's the goal to develop a tool for automated raster data download of polygonal area.
+This projects goal is to develop a tool for automated raster tile download of a polygonal area using the STAC-API by LGLN.
   
 ### Idea
-**Problem:** Raster tile download at https://ni-lgln-opengeodata.hub.arcgis.com/ is only possible for single tiles or drawed polygon by user (But then you still have to download each selected tile manually). In land consolidation we have individual areas which intersect often with about 50 tiles. That means first trying to manually draw a good polygon like the procedure area and then 50 times pressing the download-button and select the path.
+**Problem:** Raster tile download at https://ni-lgln-opengeodata.hub.arcgis.com/ is only possible for single tiles or drawed geometries by user (But then you still have to download each selected tile manually). In land consolidation we have individual areas which often intersect with about 50 tiles. That means first manually draw a fitting polygon like the procedure area and then 50 times pressing the download-button and selecting the path.
 
 **Solution:** A Tool with an Input for polygon data, perform an intersection with the raster tiles and download all selected ones to one chosen output path.
 
-**Optional extension:** creating xyz-files out of elevation raster data in chosen resolution (e.g. 1, 5, 10 m)
+**Optional extension:** creating xyz-files out of elevation raster data in chosen resolution (e.g. 1, 5, 10 m) and extend the tool to other LGLN STAC-catalogs.
   
 **First Try:** "DGM1" Data, extendable on all other raster data types in https://ni-lgln-opengeodata.hub.arcgis.com/
 
@@ -38,7 +38,7 @@ Raster2xyz:
 - select files
 - Button "Raster2xyz": create shape point file, convert every file and add to shape, save to path 
 
-** Using STAC-API**
+**Using STAC-API**
 - STAC-API catalog: https://dgm.stac.lgln.niedersachsen.de/
 - API description: https://dgm.stac.lgln.niedersachsen.de/api.html
 
