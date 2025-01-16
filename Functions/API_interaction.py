@@ -5,8 +5,8 @@ from pathlib import Path
 
 # Class to create and send request-urls and process the response
 class ApiInteraction:
-    def __init__(self, api_url, collection_id, geojson_path):
-        self.api_url = api_url
+    def __init__(self, api_catalog_url, collection_id, geojson_path):
+        self.api_catalog_url = api_catalog_url
         self.collection_id = collection_id
         self.geojson_path = geojson_path
 
@@ -25,10 +25,11 @@ class ApiInteraction:
 
         return formatted_geojson_geometry
 
+
     # function to create an url which searches for all items of a collection that intersect wit a GeoJSON polygon
     def create_request_search_intersects(self, limit, formatted_geojson_geometry):
         # define request-parts
-        base = self.api_url
+        base = self.api_catalog_url
         search = "search"
         collection = "?collections=" + str(self.collection_id)
         intersects = "&intersects=" + formatted_geojson_geometry
@@ -39,6 +40,7 @@ class ApiInteraction:
 
         return request_url
 
+
     # function to get a response by executing a request
     def execute_request(self, request_url):
         # initialize response dicts
@@ -48,6 +50,7 @@ class ApiInteraction:
         response = requests.request("GET", request_url, headers=headers, data=payload)
 
         return response
+
 
     # function to get only id and download urls from the response JSON (only for .tif-files)
     def collect_tif_download_urls(self, response):
@@ -69,6 +72,7 @@ class ApiInteraction:
 
         return dict_id_with_url
 
+    # function for GUI-button executing all steps
     def button_ai(self):
         formatted_geojson_geometry = self.format_geojson_geometry()
         request_url = self.create_request_search_intersects(500, formatted_geojson_geometry)
@@ -81,8 +85,8 @@ class ApiInteraction:
 # Example final
 # create object from class ApiInteraction
 url_dict = ApiInteraction("https://dgm.stac.lgln.niedersachsen.de/", "dgm1", str(Path.cwd()) + "/geojson output/testpolygon_small_4326.geojson").button_ai()
-
 print(url_dict)
+
 
 '''
 # Example for tests
