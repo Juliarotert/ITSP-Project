@@ -80,9 +80,9 @@ class ApiInteraction:
 
 # Example final
 # create object from class ApiInteraction
-dict = ApiInteraction("https://dgm.stac.lgln.niedersachsen.de/", "dgm1", str(Path.cwd()) + "/geojson output/testpolygon_small_4326.geojson").button_ai()
+url_dict = ApiInteraction("https://dgm.stac.lgln.niedersachsen.de/", "dgm1", str(Path.cwd()) + "/geojson output/testpolygon_small_4326.geojson").button_ai()
 
-print(dict)
+print(url_dict)
 
 '''
 # Example for tests

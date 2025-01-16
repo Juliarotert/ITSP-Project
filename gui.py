@@ -77,7 +77,7 @@ class RasterDownloader(QMainWindow):
         raster_layout.addLayout(raster_output_layout)
 
         start_download_button = QPushButton("Start download")
-        start_download_button.clicked.connect(self.start_download)
+        #start_download_button.clicked.connect(self.start_download)
         raster_layout.addWidget(start_download_button)
 
         if self.collection in ("dgm1", "dom1"):
@@ -131,37 +131,25 @@ class RasterDownloader(QMainWindow):
 
     # Execution of all processing and downloading functions from ip, ai and od
     def start_download(self):
-        try:
-            url = self.url
-            collection = self.collection
-            file_path = self.polygon_input.text()
+        api_url = "https://dgm.stac.lgln.niedersachsen.de/"
+        collection = "dgm1"
+        input_polygon_path = self.polygon_input.text()
+        output_folder = os.path.normpath(self.raster_output.text())
 
+        try:
             # Input processing
-            shapefile = ip.ShapefileInputProcessing(file_path)
-            shapefile.reproject()
-            geojson = shapefile.convert_to_geojson()
+            geojson_4326 = ip.ShapefileInputProcessing(input_polygon_path).button_ip()
 
             # API Interaction
-            api_info = ai.ApiInteraction(url, collection, geojson)
-            # get request url for intersection (with limit)
-            limit = 20
-            request = api_info.request_search_intersection(limit)
-            # get response by executing request
-            response = api_info.execute_request()
-            # get download url dict from response
-            url_dict = api_info.collect_tif_download_urls()
+            url_dict = ai.ApiInteraction(api_url, collection, geojson_4326).button_ai()
 
             # Output download
-            output_path = self.raster_output.text()
-            output_path = os.path.normpath(output_path)
-
-            # create downloader object
-            downloader = od.OutputDownloader(url_dict, output_path)
+            downloader = od.OutputDownloader(url_dict, output_folder)
             downloader.download_tif_files()
 
 
         except Exception as e:
-            print(f"a wild error occurred: {e}")
+            print(f"An error occurred: {e}")
 
 
 
