@@ -141,10 +141,10 @@ class RasterDownloader(QMainWindow):
             geojson_4326 = ip.ShapefileInputProcessing(input_polygon_path).button_ip()
 
             # API Interaction
-            url_dict = ai.ApiInteraction(api_catalog_url, collection, geojson_4326).button_ai()
+            url_dict = ai.ApiInteraction(self.url, self.collection, geojson_4326).button_ai()
 
             # Output download
-            downloader = od.OutputDownloader(url_dict, output_folder).download_dict_tif()
+            od.OutputDownloader(url_dict, output_folder).download_dict_tif()
 
         except Exception as e:
             print(f"An error occurred: {e}")

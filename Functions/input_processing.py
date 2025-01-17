@@ -24,24 +24,23 @@ class ShapefileInputProcessing:
 
 
     # function to convert the shapefile to geojson
-    def convert_to_geojson(self, output_name):
-        output_path = Path.cwd() / "geojson output/" / output_name
-        self.shapefile.to_file(output_path, driver='GeoJSON')
-        return output_path
+    def convert_to_geojson(self, output_name = "polygon_4326.geojson"):
+        self.shapefile.to_file(output_name, driver='GeoJSON')
+        return output_name
 
 
     # function for GUI-button executing all steps
     def button_ip(self):
         self.reproject()
-        geojson_path = self.convert_to_geojson("testpolygon_small_4326.geojson")
-        return geojson_path
+        polygon_4326 = self.convert_to_geojson()
+        return polygon_4326
 
 
-
+'''
 # Example final
 geojson_path = ShapefileInputProcessing("C:/Users/julie/Documents/Julia/Master GeoInfSpat/ITSP/ITSP-Project/data/test data/testpolygon_small_4647.shp").button_ip()
 print(geojson_path)
-
+'''
 
 '''
 # Example for tests

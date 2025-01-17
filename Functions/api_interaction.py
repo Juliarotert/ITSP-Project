@@ -1,6 +1,7 @@
 import requests
 import json
-from pathlib import Path
+#from pathlib import Path
+#import input_processing as ip
 
 
 # Class to create and send request-urls and process the response
@@ -82,11 +83,12 @@ class ApiInteraction:
         return dict_id_with_url
 
 
+'''
 # Example final
 # create object from class ApiInteraction
-url_dict = ApiInteraction("https://dgm.stac.lgln.niedersachsen.de/", "dgm1", str(Path.cwd()) + "/geojson output/testpolygon_small_4326.geojson").button_ai()
+url_dict = ApiInteraction("https://dgm.stac.lgln.niedersachsen.de/", "dgm1", ip.geojson_path).button_ai()
 print(url_dict)
-
+'''
 
 '''
 # Example for tests
