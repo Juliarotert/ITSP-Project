@@ -1,6 +1,6 @@
 import requests
 import json
-#from pathlib import Path
+
 #import input_processing as ip
 
 
@@ -100,7 +100,7 @@ api_url_dgm = "https://dgm.stac.lgln.niedersachsen.de/"
 collectiondgm1 = "dgm1"
 
 # path to geojson
-geojson = str(Path.cwd()) + "/geojson output/testpolygon_small_4326.geojson"
+geojson = ip.geojson_path
 
 # create object from class ApiInteraction
 dgm1_api_interaction = ApiInteraction(api_url_dgm, collectiondgm1, geojson)

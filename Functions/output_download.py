@@ -1,7 +1,7 @@
 import requests
 
 #import functions.api_interaction as ai
-#from pathlib import Path
+
 
 # Class to execute download-urls and save them
 class OutputDownloader:

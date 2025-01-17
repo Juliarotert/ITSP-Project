@@ -1,5 +1,4 @@
 import geopandas as gpd
-from pathlib import Path
 
 
 # class with functions to process a shapefile from path
@@ -48,7 +47,7 @@ file_path = "C:/Users/julie/Documents/Julia/Master GeoInfSpat/ITSP/ITSP-Project/
 
 shapefile = ShapefileInputProcessing(file_path)
 shapefile.reproject()
-geojson = shapefile.convert_to_geojson("testpolygon_small_4326.geojson")
+geojson = shapefile.convert_to_geojson("polygon_4326.geojson")
 
 #geojson = shapefile.return_geojson()
 
