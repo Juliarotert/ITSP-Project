@@ -12,15 +12,19 @@ class ApiInteraction:
         self.geojson_path = geojson_path
 
 
-    # function to format the geojson file fitting for the request-url
-    def format_geojson_geometry(self):
+    def get_geojson_geometry(self):
         # open and read the GeoJSON-file and extract the data
         with open(self.geojson_path, 'r') as geojson_file:
             data = json.load(geojson_file)
 
         # only return the geometry of the geojson
-        geojson_geometry = json.dumps(data["features"][0]["geometry"],  ensure_ascii=False)
+        geojson_geometry = json.dumps(data["features"][0]["geometry"], ensure_ascii=False)
 
+        return geojson_geometry
+
+
+    # function to format the geojson file fitting for the request-url
+    def format_geojson_geometry(self, geojson_geometry):
         # return a geojson without Spaces
         formatted_geojson_geometry = geojson_geometry.replace(" ", "")
 
@@ -42,8 +46,8 @@ class ApiInteraction:
         return request_url
 
 
-    # function to get a response by executing a request
-    def execute_request(self, request_url):
+    # function to get a response by sending a request
+    def send_request(self, request_url):
         # initialize response dicts
         payload = {}
         headers = {}
@@ -75,9 +79,10 @@ class ApiInteraction:
 
     # function for GUI-button executing all steps
     def button_ai(self):
-        formatted_geojson_geometry = self.format_geojson_geometry()
+        geojson_geometry = self.get_geojson_geometry()
+        formatted_geojson_geometry = self.format_geojson_geometry(geojson_geometry)
         request_url = self.create_request_search_intersects(500, formatted_geojson_geometry)
-        response = self.execute_request(request_url)
+        response = self.send_request(request_url)
         dict_id_with_url = self.collect_tif_download_urls(response)
 
         return dict_id_with_url
