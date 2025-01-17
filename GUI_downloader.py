@@ -1,4 +1,6 @@
-from PyQt5.QtWidgets import *
+from PyQt5.QtWidgets import (
+    QMainWindow, QWidget, QVBoxLayout, QHBoxLayout,
+    QFileDialog, QLabel, QLineEdit, QPushButton, QMessageBox, QProgressBar, QApplication)
 
 import functions.input_processing as ip
 import functions.api_interaction as ai
@@ -19,7 +21,7 @@ class PolygonDownloader(QMainWindow):
 
         # polygon input
         layout.addWidget(QLabel("Polygon Input (.shp-file):"))
-        self.polygon_input = QLineEdit()
+        self.polygon_input = QLineEdit("C:/Users/julie/Documents/Julia/Master GeoInfSpat/ITSP/ITSP-Project/data/test data/testpolygon_small_4326.shp")
         polygon_layout = QHBoxLayout()
         polygon_layout.addWidget(self.polygon_input)
         polygon_browse = QPushButton("...")
@@ -31,7 +33,7 @@ class PolygonDownloader(QMainWindow):
 
         # raster output
         layout.addWidget(QLabel("Output Folder:"))
-        self.output = QLineEdit()
+        self.output = QLineEdit("C:/Users/julie/Documents/Julia/Master GeoInfSpat/ITSP/ITSP-Project/data/output test")
         output_layout = QHBoxLayout()
         output_layout.addWidget(self.output)
         output_browse = QPushButton("...")
@@ -46,6 +48,12 @@ class PolygonDownloader(QMainWindow):
         self.download_button.clicked.connect(self.start_download)
         layout.addWidget(self.download_button)
 
+        layout.addSpacing(20)
+
+        # progress bar
+        self.progressbar = QProgressBar()
+        layout.addWidget(self.progressbar)
+
     # function to select polygon path
     def browse_polygon_shapefile(self):
         file_name, _ = QFileDialog.getOpenFileName(self, "Select Polygon File", "*.shp")
@@ -58,14 +66,16 @@ class PolygonDownloader(QMainWindow):
         if folder_name:
             self.output.setText(folder_name)
 
+    # function to execute all relevant functions to download the data
     def start_download(self):
         api_catalog_url = "https://dgm.stac.lgln.niedersachsen.de/"
         collection = "dgm1"
-
         input_polygon_path = self.polygon_input.text()
         output_folder = self.output.text()
+
         print(f" input: {input_polygon_path}, output: {output_folder}")
 
+        # show error it there is a missing path
         if not input_polygon_path or not output_folder:
             QMessageBox.warning(self, "Error", "Please select paths")
             return
@@ -77,15 +87,30 @@ class PolygonDownloader(QMainWindow):
             # API Interaction
             url_dict = ai.ApiInteraction(api_catalog_url, collection, geojson_4326).button_ai()
 
-            QMessageBox.information(self, "Selection", f"{len(url_dict)} Items selected: start download?")
+            # show a message about the count of returned items
+            QMessageBox.information(self, "Selection", f"{len(url_dict)} Items selected")
 
-            # Output download
-            od.OutputDownloader(url_dict, output_folder).download_dict_tif()
+            # create a progress bar depending on the count of items
+            self.progressbar.setMaximum(len(url_dict))
+
+            # create a downloader object and
+            downloader = od.OutputDownloader(url_dict, output_folder)
+            self.download_button.disconnect()
+            self.download_button.clicked.connect(downloader.cancel_download)
+            self.download_button.setText("Cancel download")
+
+            # output download
+            print("Starting download")
+            QApplication.processEvents()
+            downloader.download_dict_tif(self.progressbar)
 
         except Exception as e:
             print(f"An error occurred: {e}")
 
-        QMessageBox.information(self, "Success", "Download finished")
+        finally:
+            self.download_button.disconnect()
+            self.download_button.setText("Start download")
+            self.download_button.clicked.connect(self.start_download)
 
 
 
