@@ -27,15 +27,19 @@ class PolygonDownloader(QMainWindow):
         polygon_layout.addWidget(polygon_browse)
         layout.addLayout(polygon_layout)
 
+        layout.addSpacing(20)
+
         # raster output
-        layout.addWidget(QLabel("Raster Output Folder:"))
-        self.raster_output = QLineEdit()
-        raster_layout = QHBoxLayout()
-        raster_layout.addWidget(self.raster_output)
-        raster_browse = QPushButton("...")
-        raster_browse.clicked.connect(self.browse_raster_folder)
-        raster_layout.addWidget(raster_browse)
-        layout.addLayout(raster_layout)
+        layout.addWidget(QLabel("Output Folder:"))
+        self.output = QLineEdit()
+        output_layout = QHBoxLayout()
+        output_layout.addWidget(self.output)
+        output_browse = QPushButton("...")
+        output_browse.clicked.connect(self.browse_output_folder)
+        output_layout.addWidget(output_browse)
+        layout.addLayout(output_layout)
+
+        layout.addSpacing(20)
 
         # start download button
         self.download_button = QPushButton("Start download")
@@ -48,17 +52,18 @@ class PolygonDownloader(QMainWindow):
         if file_name:
             self.polygon_input.setText(file_name)
 
-    def browse_raster_folder(self):
-        folder_name = QFileDialog.getExistingDirectory(self, "Select Raster Output Folder")
+    # function to select output folder
+    def browse_output_folder(self):
+        folder_name = QFileDialog.getExistingDirectory(self, "Select Output Folder")
         if folder_name:
-            self.raster_output.setText(folder_name)
+            self.output.setText(folder_name)
 
     def start_download(self):
         api_catalog_url = "https://dgm.stac.lgln.niedersachsen.de/"
         collection = "dgm1"
 
         input_polygon_path = self.polygon_input.text()
-        output_folder = self.raster_output.text()
+        output_folder = self.output.text()
         print(f" input: {input_polygon_path}, output: {output_folder}")
 
         if not input_polygon_path or not output_folder:
@@ -71,6 +76,8 @@ class PolygonDownloader(QMainWindow):
 
             # API Interaction
             url_dict = ai.ApiInteraction(api_catalog_url, collection, geojson_4326).button_ai()
+
+            QMessageBox.information(self, "Selection", f"{len(url_dict)} Items selected: start download?")
 
             # Output download
             od.OutputDownloader(url_dict, output_folder).download_dict_tif()
