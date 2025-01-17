@@ -1,9 +1,9 @@
-import sys
 from PyQt5.QtWidgets import *
 
 import functions.input_processing as ip
 import functions.api_interaction as ai
 import functions.output_download as od
+
 
 class PolygonDownloader(QMainWindow):
     def __init__(self):
@@ -81,8 +81,4 @@ class PolygonDownloader(QMainWindow):
         QMessageBox.information(self, "Success", "Download finished")
 
 
-if __name__ == "__main__":
-    app = QApplication(sys.argv)
-    window = PolygonDownloader()
-    window.show()
-    sys.exit(app.exec_())
+
