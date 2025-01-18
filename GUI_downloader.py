@@ -1,6 +1,7 @@
 from PyQt5.QtWidgets import (
     QMainWindow, QWidget, QVBoxLayout, QHBoxLayout,
-    QFileDialog, QLabel, QLineEdit, QPushButton, QMessageBox, QProgressBar, QApplication)
+    QLabel, QFileDialog, QLineEdit, QPushButton,
+    QMessageBox, QProgressBar, QApplication)
 
 import functions.input_processing as ip
 import functions.api_interaction as ai
@@ -21,7 +22,7 @@ class PolygonDownloader(QMainWindow):
 
         # polygon input
         layout.addWidget(QLabel("Polygon Input (.shp-file):"))
-        self.polygon_input = QLineEdit("C:/Users/julie/Documents/Julia/Master GeoInfSpat/ITSP/ITSP-Project/data/test data/testpolygon_small_4326.shp")
+        self.polygon_input = QLineEdit()
         polygon_layout = QHBoxLayout()
         polygon_layout.addWidget(self.polygon_input)
         polygon_browse = QPushButton("...")
@@ -33,7 +34,7 @@ class PolygonDownloader(QMainWindow):
 
         # raster output
         layout.addWidget(QLabel("Output Folder:"))
-        self.output = QLineEdit("C:/Users/julie/Documents/Julia/Master GeoInfSpat/ITSP/ITSP-Project/data/output test")
+        self.output = QLineEdit()
         output_layout = QHBoxLayout()
         output_layout.addWidget(self.output)
         output_browse = QPushButton("...")
