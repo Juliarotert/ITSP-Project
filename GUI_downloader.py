@@ -112,4 +112,3 @@ class PolygonDownloader(QMainWindow):
             self.download_button.disconnect()
             self.download_button.setText("Start download")
             self.download_button.clicked.connect(self.start_download)
-
