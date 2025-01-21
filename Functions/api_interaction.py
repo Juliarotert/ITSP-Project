@@ -12,6 +12,7 @@ class ApiInteraction:
         self.geojson_path = geojson_path
 
 
+    # function to extract only the geometry part from the GeoJSON
     def get_geojson_geometry(self):
         # open and read the GeoJSON-file and extract the data
         with open(self.geojson_path, 'r') as geojson_file:
@@ -76,6 +77,7 @@ class ApiInteraction:
             print(f"Error: {response.status_code}")
 
         return dict_id_with_url
+
 
     # function for GUI-button executing all steps
     def button_ai(self):

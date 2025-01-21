@@ -2,6 +2,8 @@ from PyQt5.QtWidgets import (
     QMainWindow, QWidget, QVBoxLayout, QHBoxLayout,
     QLabel, QFileDialog, QLineEdit, QPushButton,
     QMessageBox, QProgressBar, QApplication)
+from PyQt5.QtGui import QIcon
+from PyQt5.uic.properties import QtGui
 
 import functions.input_processing as ip
 import functions.api_interaction as ai
@@ -11,6 +13,7 @@ import functions.output_download as od
 class PolygonDownloader(QMainWindow):
     def __init__(self):
         super().__init__()
+
         self.setWindowTitle("DGM1 Polygondownloader")
         self.setGeometry(200, 200, 500, 200)
 
@@ -19,6 +22,8 @@ class PolygonDownloader(QMainWindow):
         self.setCentralWidget(central_widget)
         layout = QVBoxLayout()
         central_widget.setLayout(layout)
+
+        self.setWindowIcon(QIcon('media/Logo.png'))
 
         # polygon input
         layout.addWidget(QLabel("Polygon Input (.shp-file):"))
@@ -96,14 +101,20 @@ class PolygonDownloader(QMainWindow):
 
             # create a downloader object and
             downloader = od.OutputDownloader(url_dict, output_folder)
+
             self.download_button.disconnect()
             self.download_button.clicked.connect(downloader.cancel_download)
             self.download_button.setText("Cancel download")
 
             # output download
             print("Starting download")
+
+            #
             QApplication.processEvents()
             downloader.download_dict_tif(self.progressbar)
+            if downloader.cancelled is True:
+                QMessageBox.information(self, "Cancelled", f"Download cancelled")
+
 
         except Exception as e:
             print(f"An error occurred: {e}")

@@ -11,6 +11,9 @@ class OutputDownloader:
         self.output_folder = output_folder
         self.cancelled = False
 
+    def cancel_download(self):
+        self.cancelled = True
+
     # function to download the files as id-name
     def download_dict_tif(self, progressbar=None):
         total_number = len(self.dict)
@@ -20,7 +23,7 @@ class OutputDownloader:
         for id, url in self.dict.items():
             if self.cancelled:
                 print("Download was cancelled")
-                break
+                return download_number
             response = requests.get(url)
             file_path = f"{self.output_folder}/{id}.tif"
             with open(file_path, 'wb') as f:
@@ -32,8 +35,7 @@ class OutputDownloader:
             QApplication.processEvents()
         self.cancelled = False
 
-    def cancel_download(self):
-        self.cancelled = True
+
 
 
 '''
