@@ -21,20 +21,22 @@ class OutputDownloader:
 
         # download and save each file from the dict
         for id, url in self.dict.items():
+            # check if download was cancelled
             if self.cancelled:
                 print("Download was cancelled")
-                return download_number
+                break
+
+            # get and save url as "id.tif" to the folder
             response = requests.get(url)
             file_path = f"{self.output_folder}/{id}.tif"
             with open(file_path, 'wb') as f:
                 f.write(response.content)
 
+            # add one to the count of downloaded files for the progress
             download_number += 1
             print(f"Downloaded {download_number}/{total_number}: {id}")
             progressbar.setValue(download_number)
             QApplication.processEvents()
-        self.cancelled = False
-
 
 
 
