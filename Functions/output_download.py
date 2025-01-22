@@ -47,7 +47,7 @@ class OutputDownloader:
 dict = ai.url_dict
 
 # output folder path
-output_path = "C:/Users/julie/Documents/Julia/Master GeoInfSpat/ITSP/ITSP-Project/data/output test")
+output_path = "Data/output test")
 
 # download urls
 od = OutputDownloader(dict, output_path)

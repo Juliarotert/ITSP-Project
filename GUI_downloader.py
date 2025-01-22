@@ -14,7 +14,7 @@ class PolygonDownloader(QMainWindow):
     def __init__(self):
         super().__init__()
         # basic window properties
-        self.setWindowIcon(QIcon('media/PolygonDownloader_Logo.png'))
+        self.setWindowIcon(QIcon('Media/PolygonDownloader_Logo.png'))
         self.setWindowTitle("DGM1 Polygondownloader")
         self.setGeometry(200, 200, 500, 200)
 
@@ -71,7 +71,7 @@ class PolygonDownloader(QMainWindow):
         if folder_name:
             self.output.setText(folder_name)
 
-    # function to execute all relevant functions to download the data
+    # function to execute all relevant functions to download the Data
     def start_download(self):
         api_catalog_url = "https://dgm.stac.lgln.niedersachsen.de/"
         collection = "dgm1"

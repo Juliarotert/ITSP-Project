@@ -23,7 +23,7 @@ class ShapefileInputProcessing:
 
 
     # function to convert the shapefile to geojson
-    def convert_to_geojson(self, output_name = "data/polygon_4326.geojson"):
+    def convert_to_geojson(self, output_name = "Data/polygon_4326.geojson"):
         self.shapefile.to_file(output_name, driver='GeoJSON')
         return output_name
 
@@ -37,13 +37,13 @@ class ShapefileInputProcessing:
 
 '''
 # Example final
-geojson_path = ShapefileInputProcessing("C:/Users/julie/Documents/Julia/Master GeoInfSpat/ITSP/ITSP-Project/data/test data/testpolygon_small_4647.shp").button_ip()
+geojson_path = ShapefileInputProcessing("Data/testdata/testpolygon_small_4647.shp").button_ip()
 print(geojson_path)
 '''
 
 '''
 # Example for tests
-file_path = "C:/Users/julie/Documents/Julia/Master GeoInfSpat/ITSP/ITSP-Project/data/test data/testpolygon_small_4647.shp"
+file_path = "Data/testdata/testpolygon_small_4647.shp"
 
 shapefile = ShapefileInputProcessing(file_path)
 shapefile.reproject()
