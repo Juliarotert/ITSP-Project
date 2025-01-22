@@ -3,7 +3,7 @@ from PyQt5.QtWidgets import (
     QLabel, QFileDialog, QLineEdit, QPushButton,
     QMessageBox, QProgressBar, QApplication)
 from PyQt5.QtGui import QIcon
-from PyQt5.uic.properties import QtGui
+
 
 import functions.input_processing as ip
 import functions.api_interaction as ai

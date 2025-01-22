@@ -23,7 +23,7 @@ class ShapefileInputProcessing:
 
 
     # function to convert the shapefile to geojson
-    def convert_to_geojson(self, output_name = "polygon_4326.geojson"):
+    def convert_to_geojson(self, output_name = "data/polygon_4326.geojson"):
         self.shapefile.to_file(output_name, driver='GeoJSON')
         return output_name
 
