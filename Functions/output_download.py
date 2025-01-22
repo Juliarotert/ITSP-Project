@@ -11,6 +11,7 @@ class OutputDownloader:
         self.output_folder = output_folder
         self.cancelled = False
 
+    # function to set cancelled on True if it was cancelled
     def cancel_download(self):
         self.cancelled = True
 
