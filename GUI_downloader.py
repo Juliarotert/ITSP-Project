@@ -13,7 +13,8 @@ import functions.output_download as od
 class PolygonDownloader(QMainWindow):
     def __init__(self):
         super().__init__()
-
+        # basic window properties
+        self.setWindowIcon(QIcon('media/PolygonDownloader_Logo.png'))
         self.setWindowTitle("DGM1 Polygondownloader")
         self.setGeometry(200, 200, 500, 200)
 
@@ -22,8 +23,6 @@ class PolygonDownloader(QMainWindow):
         self.setCentralWidget(central_widget)
         layout = QVBoxLayout()
         central_widget.setLayout(layout)
-
-        self.setWindowIcon(QIcon('media/Logo.png'))
 
         # polygon input
         layout.addWidget(QLabel("Polygon Input (.shp-file):"))
