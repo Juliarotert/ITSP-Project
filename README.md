@@ -10,26 +10,12 @@ This projects goal is to develop a tool to download DGM1 raster tiles intersecti
 **Solution:** A Tool with an Input for polygon data as a shapefile, perform an intersection with the raster tiles and download all selected ones to one chosen output path.
 
 ### Concept
-**GUI:** 
-- Selection of raster data Type (DGM, DOM, DOP, ...)
-- Input of polygon data (or maybe choose to draw on website or other map??? or selection of other district boundaries (Verwaltungsgrenzen))
-- Output path selection (or default to downloads)
+**Project structure**
+- Classes: for input-processing, API-interaction and download
+- GUI: Input, Output, download-/cancel-button, progressbar
+- main.py: Executes the program
 
-**Project Structure**
-- functions folder: files for classes with functions for processing
-- GUI: Input, Output, Buttons
-- main: Execute program
-- testdata, documentation, etc.
-
-**Functionalities**
-
-Downloader:
-- start GUI
-- choose I/O
-- Button "start download": reprojection, conversion, request, get download-links, execute links to path
-
-
-**Using STAC-API**
+**LGLN STAC-API**
 - STAC-API catalog: https://dgm.stac.lgln.niedersachsen.de/
 - API description: https://dgm.stac.lgln.niedersachsen.de/api.html
 
