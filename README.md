@@ -4,13 +4,11 @@
 ## Short description of the project
 This projects goal is to develop a tool for automated raster tile download of a polygonal area using the STAC-API by LGLN.
   
-### Idea
+### Background and Idea
 **Problem:** Raster tile download at https://ni-lgln-opengeodata.hub.arcgis.com/ is only possible for single tiles or drawed geometries by user (But then you still have to download each selected tile manually). In land consolidation we have individual areas which often intersect with about 50 tiles. That means first manually draw a fitting polygon like the procedure area and then 50 times pressing the download-button and selecting the path.
 
 **Solution:** A Tool with an Input for polygon data, perform an intersection with the raster tiles and download all selected ones to one chosen output path.
 
-**Optional extension:** creating xyz-files out of elevation raster data in chosen resolution (e.g. 1, 5, 10 m) and extend the tool to other LGLN STAC-catalogs.
-  
 **First Try:** "DGM1" Data, extendable on all other raster data types in https://ni-lgln-opengeodata.hub.arcgis.com/
 
 ### Concept
@@ -18,9 +16,7 @@ This projects goal is to develop a tool for automated raster tile download of a 
 - Selection of raster data Type (DGM, DOM, DOP, ...)
 - Input of polygon data (or maybe choose to draw on website or other map??? or selection of other district boundaries (Verwaltungsgrenzen))
 - Output path selection (or default to downloads)
-- further functions button: xyz, transform to 4647, ...
 
-### Realization
 **Project Structure**
 - functions folder: files for classes with functions for processing
 - GUI: Input, Output, Buttons
@@ -34,21 +30,52 @@ Downloader:
 - choose I/O
 - Button "start download": reprojection, conversion, request, get download-links, execute links to path
 
-Raster2xyz:
-- select files
-- Button "Raster2xyz": create shape point file, convert every file and add to shape, save to path 
 
 **Using STAC-API**
 - STAC-API catalog: https://dgm.stac.lgln.niedersachsen.de/
 - API description: https://dgm.stac.lgln.niedersachsen.de/api.html
 
-### Evaluation
-- functionality
-- difficulties
 
-- extension to other open data APIs possible?
+## How to start the project
+**Requirements:**
+- Python 3.8 or higher (ensure that pip is installed)
+```bash
+# check the version with 
+python --version
+# or
+python3 --version
 
-## How to start the project (dependencies etc.)
-- PyQT
-- Geopandas
-- requirements.txt
+# Install pip 
+python -m ensurepip
+# or update pip
+python -m pip install --upgrade pip
+```
+**Steps:**
+- Clone the repository and navigate to the project-folder
+```bash
+# 1.
+cd /path/to/targetdirectory 
+# 2. 
+git clone https://github.com/Juliarotert/ITSP-Project.git
+# 3.
+cd ITSP-Project
+```
+- Set up a virtual environment
+```bash
+# 4.
+pip install virtualenv
+# 5. 
+python -m venv .venv  
+# 6.
+.\.venv\Scripts\activate.ps1  
+```
+- Install the dependencies
+```bash
+# 7.
+pip install -r requirements.txt
+```
+- Run in terminal
+```bash
+python main.py
+```
+- Run in IDE: open main.py or do a right-click on it and run it
