@@ -1,15 +1,13 @@
-# ITSP-Project
-**Final python-project for the Introduction to Software Programming course in wintersemester 24/25**
+# Polygon Download Tool for LGLN OpenGeoData (DGM1)
+**Final python-project for the Introduction to Software Programming course in wintersemester 24/25 at IFGI (University of Münster)**
 
 ## Short description of the project
-This projects goal is to develop a tool for automated raster tile download of a polygonal area using the STAC-API by LGLN.
+This projects goal is to develop a tool to download DGM1 raster tiles intersecting a polygonal area using the STAC-API by LGLN.
   
 ### Background and Idea
 **Problem:** Raster tile download at https://ni-lgln-opengeodata.hub.arcgis.com/ is only possible for single tiles or drawed geometries by user (But then you still have to download each selected tile manually). In land consolidation we have individual areas which often intersect with about 50 tiles. That means first manually draw a fitting polygon like the procedure area and then 50 times pressing the download-button and selecting the path.
 
-**Solution:** A Tool with an Input for polygon data, perform an intersection with the raster tiles and download all selected ones to one chosen output path.
-
-**First Try:** "DGM1" Data, extendable on all other raster data types in https://ni-lgln-opengeodata.hub.arcgis.com/
+**Solution:** A Tool with an Input for polygon data as a shapefile, perform an intersection with the raster tiles and download all selected ones to one chosen output path.
 
 ### Concept
 **GUI:** 
