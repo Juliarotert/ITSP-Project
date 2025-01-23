@@ -12,10 +12,14 @@ This projects goal is to develop a tool to download DGM1 raster tiles intersecti
 ### Concept
 **Project structure**
 - Classes: for input-processing, API-interaction and download
-- GUI: Input, Output, download-/cancel-button, progressbar
+- GUI: Input-/output-dialog, download-/cancel-button, progressbar
 - main.py: Executes the program
 
+<img src="Media/GUI.png" width="300">
+
 **LGLN STAC-API**
+
+By sending a GET-request with the query-parameters "collections" (dgm1) and "intersects" (GeoJSON-geometry) to the API, the items that intersect the polygon can be selected. To each item there is a download-url assigned which can be fetched.
 - STAC-API catalog: https://dgm.stac.lgln.niedersachsen.de/
 - API description: https://dgm.stac.lgln.niedersachsen.de/api.html
 
