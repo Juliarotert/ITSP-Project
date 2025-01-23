@@ -1,25 +1,25 @@
 # Polygon Download Tool for LGLN OpenGeoData (DGM1)
-**Final python-project for the Introduction to Software Programming course in wintersemester 24/25 at IFGI (University of Münster)**
+**Final Python project for the Introduction to Software Programming course in wintersemester 24/25 at IFGI (University of Münster)**
 
 ## Short description of the project
-This projects goal is to develop a tool to download DGM1 raster tiles intersecting a polygonal area using the STAC-API by LGLN (Landesamt für Geoinformation und Landesvermessung Niedersachsen). This tool should simplily the download procedure for land consolidation procedure areas at the ArL (Amt für regionale Landesentwicklung).
+This projects goal is to develop a tool to download DGM1 raster tiles intersecting a polygonal area using the STAC-API by LGLN (Landesamt für Geoinformation und Landesvermessung Niedersachsen). This tool should simplify the download procedure for land consolidation procedure areas at the ArL (Amt für regionale Landesentwicklung).
   
 ### Background and Idea
-**Problem:** The raster tile download at the [OpenGeoData download application](https://ni-lgln-opengeodata.hub.arcgis.com/) is only possible for single tiles or geometries drawn by user still needing to download each selected tile manually. In land consolidation there are very individual areas which often intersect with about 50 tiles. That means first manually draw a fitting polygon and then 50 times pressing the download-button and selecting the path.
+**Problem:** The raster tile download on the [OpenGeoData download application](https://ni-lgln-opengeodata.hub.arcgis.com/) is only possible for individual tiles or geometries drawn by user, requiring manual downloading of each selected tile. In land consolidation there are very individual areas which often intersect with about 50 tiles. That means first manually drawing a fitting polygon and then pressing the download-button and selecting the path 50 times.
 
 **Solution:** A tool with an input for polygon data as a shapefile, perform an intersection with the raster tiles and download all selected ones to one chosen output path.
 
 ### Concept
 **Project structure**
-- Classes: for input-processing, API-interaction and download
-- GUI: Input-/output-dialog, start/cancel download button, progressbar
-- main.py: Executes the program
+- Classes: containing functions for input-processing, API-interaction and download
+- GUI: input-/output-dialog, start/cancel download button, progressbar, messageboxes
+- main.py: executes the program
 
 <img src="Media/GUI.png" width="300">
 
 **LGLN STAC-API**
 
-By sending a GET-request with the query-parameters "collections" (dgm1) and "intersects" (GeoJSON-geometry) to the API, the items that intersect the polygon can be selected. To each item there is a download-url assigned which can be fetched.
+By sending a GET-request with the query-parameters "collections" (dgm1) and "intersects" (GeoJSON-geometry) to the API, the items that intersect the polygon can be selected. To each item is assigned a download URL that can be fetched.
 - STAC-API catalog: https://dgm.stac.lgln.niedersachsen.de/
 - API description: https://dgm.stac.lgln.niedersachsen.de/api.html
 
@@ -27,9 +27,15 @@ By sending a GET-request with the query-parameters "collections" (dgm1) and "int
 ## How to start the project
 **Requirements:**
 
+(Optional: Git)
+```bash
+# check if Git is installed
+git --version
+```
+
 Python 3.8 or higher (ensure that pip is installed)
 ```bash
-# check the version with 
+# check the python version with 
 python --version
 # or
 python3 --version
@@ -41,7 +47,7 @@ python -m pip install --upgrade pip
 ```
 **Steps:**
 
-Clone the repository and navigate to the project-folder
+With Git: clone the repository and navigate to the project-folder
 ```bash
 # 1.
 cd /path/to/targetdirectory 
@@ -49,6 +55,10 @@ cd /path/to/targetdirectory
 git clone https://github.com/Juliarotert/ITSP-Project.git
 # 3.
 cd ITSP-Project
+```
+Without Git: download the repository from GitHub (green box: <> Code -> Download ZIP) and unzip it
+```bash
+cd path/to/unzipped/project-folder
 ```
 Set up a virtual environment
 ```bash
@@ -68,4 +78,4 @@ Run in terminal
 ```bash
 python main.py
 ```
-Run in IDE: open main.py or do a right-click on it and run it
+Run in IDE: open main.py or right-click on it and run it
