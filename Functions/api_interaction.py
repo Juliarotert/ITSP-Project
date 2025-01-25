@@ -14,7 +14,7 @@ class ApiInteraction:
 
     # function to extract only the geometry part from the GeoJSON
     def get_geojson_geometry(self):
-        # open and read the GeoJSON-file and extract the Data
+        # open and read the GeoJSON-file and extract the data
         with open(self.geojson_path, 'r') as geojson_file:
             data = json.load(geojson_file)
 

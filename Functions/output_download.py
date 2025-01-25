@@ -1,7 +1,7 @@
 import requests
 from PyQt5.QtWidgets import QApplication
 
-#import functions.api_interaction as ai
+#import api_interaction as ai
 
 
 # Class to execute download-urls and save them

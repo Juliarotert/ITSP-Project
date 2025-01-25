@@ -1,7 +1,7 @@
 import geopandas as gpd
 
 
-# class with functions to process a shapefile from path
+# class with Functions to process a shapefile from path
 class ShapefileInputProcessing:
     def __init__(self, shapefile_path):
         self.shapefile_path = shapefile_path

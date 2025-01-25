@@ -5,9 +5,9 @@ from PyQt5.QtWidgets import (
 from PyQt5.QtGui import QIcon
 
 
-import functions.input_processing as ip
-import functions.api_interaction as ai
-import functions.output_download as od
+import Functions.input_processing as ip
+import Functions.api_interaction as ai
+import Functions.output_download as od
 
 
 class PolygonDownloader(QMainWindow):
@@ -71,7 +71,7 @@ class PolygonDownloader(QMainWindow):
         if folder_name:
             self.output.setText(folder_name)
 
-    # function to execute all relevant functions to download the Data
+    # function to execute all relevant Functions to download the Data
     def start_download(self):
         api_catalog_url = "https://dgm.stac.lgln.niedersachsen.de/"
         collection = "dgm1"
