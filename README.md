@@ -42,7 +42,9 @@ python --version
 # or
 python3 --version
 
-# Install pip 
+# check if pip is installed
+pip --version
+# Install pip
 python -m ensurepip
 # or update pip
 python -m pip install --upgrade pip
@@ -70,6 +72,8 @@ pip install virtualenv
 python -m venv .venv  
 # 6.
 .\.venv\Scripts\activate.ps1  
+# 6. alternative (depends on terminal)
+.\.venv\Scripts\activate
 ```
 Install the dependencies
 ```bash
