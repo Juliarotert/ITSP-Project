@@ -9,3 +9,4 @@ if __name__ == "__main__":
     window = PolygonDownloader()
     window.show()
     sys.exit(app.exec_())
+
