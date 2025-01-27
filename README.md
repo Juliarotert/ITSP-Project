@@ -19,7 +19,7 @@ This projects goal is to develop a tool to download DGM1 raster tiles intersecti
 
 **LGLN STAC-API**
 
-By sending a GET-request with the query-parameters "collections" (dgm1) and "intersects" (GeoJSON-geometry) to the API, the items that intersect the polygon can be selected. To each item is assigned a download URL that can be fetched.
+By sending a GET-request with the query-parameters "collections" (dgm1) and "intersects" (GeoJSON-geometry) to the API, the items that intersect the polygon can be selected. To each item is assigned a download URL that can be fetched. 
 - STAC-API catalog: https://dgm.stac.lgln.niedersachsen.de/
 - API description: https://dgm.stac.lgln.niedersachsen.de/api.html
 
