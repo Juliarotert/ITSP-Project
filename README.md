@@ -2,17 +2,17 @@
 **Final Python project for the Introduction to Software Programming course in wintersemester 24/25 at IFGI (University of Münster)**
 
 ## Short description of the project
-This projects goal is to develop a tool to download DGM1 raster tiles intersecting a polygonal area using the STAC-API by LGLN (State Office for Geoinformation and Land Surveying Lower Saxony). This tool should simplify the download procedure for land consolidation procedure areas at the ArL (Amt für regionale Landesentwicklung).
+This projects goal is to develop a tool to download DGM1 raster tiles intersecting a polygonal area using the STAC-API by LGLN (State Office for Geoinformation and Land Surveying Lower Saxony). This tool should simplify the download procedure for land consolidation procedure areas at the ArL (Office for Regional Development).
   
 ### Background and Idea
 **Problem:** The raster tile download on the [OpenGeoData download application](https://ni-lgln-opengeodata.hub.arcgis.com/) is only possible for individual tiles or geometries drawn by user, requiring manual downloading of each selected tile. In land consolidation there are very individual areas which often intersect with about 50 tiles. That means first manually digitizing a fitting polygon and then pressing the download-button and selecting the path 50 times.
 
-**Solution:** A tool with an input for polygon data as a shapefile, perform an intersection with the raster tiles and download all selected ones to one chosen output path.
+**Solution:** A tool with an input for polygon data as shapefile, a possibility to choose an output folder and a button to perform an intersection with the raster tiles and download all selected ones to the chosen output path.
 
 ### Concept
 **Project structure**
 - Classes: containing functions for input-processing, API-interaction and download
-- GUI: input-/output-dialog, start/cancel download button, progressbar, messageboxes
+- GUI: input/output dialog, start/cancel download button, progressbar, messageboxes
 - main.py: executes the program
 
 <img src="Media/GUI.png" width="300">
