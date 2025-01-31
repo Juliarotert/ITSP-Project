@@ -2,7 +2,7 @@
 **Final Python project for the Introduction to Software Programming course in wintersemester 24/25 at IFGI (University of Münster)**
 
 ## Short description of the project
-This projects goal is to develop a tool to download DGM1 raster tiles intersecting a polygonal area using the STAC-API by LGLN (State Office for Geoinformation and Land Surveying Lower Saxony). This tool should simplify the download procedure for land consolidation procedure areas at the ArL (Amt für regionale Landesentwicklung).
+This projects goal is to develop a tool to download DGM1 raster tiles intersecting a polygonal area using the STAC-API by LGLN (State Office for Geoinformation and Land Surveying Lower Saxony). This tool should simplify the download procedure for land consolidation procedure areas at the ArL (Office for Regional Development).
   
 ### Background and Idea
 **Problem:** The raster tile download on the [OpenGeoData download application](https://ni-lgln-opengeodata.hub.arcgis.com/) is only possible for individual tiles or geometries drawn by user, requiring manual downloading of each selected tile. In land consolidation there are very individual areas which often intersect with about 50 tiles. That means first manually digitizing a fitting polygon and then pressing the download-button and selecting the path 50 times.
